@@ -1,4 +1,4 @@
-module Bingo where
+module Day4.Bingo where
 
 import Data.Either
 import Data.List (groupBy, transpose)

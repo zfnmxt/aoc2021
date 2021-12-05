@@ -1,4 +1,4 @@
-module Diagnostic where
+module Day3.Diagnostic where
 
 import Data.List (transpose)
 

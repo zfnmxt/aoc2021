@@ -1,4 +1,4 @@
-module Dive where
+module Day2.Dive where
 
 import Data.Char (isSpace)
 
@@ -15,7 +15,7 @@ parse s =
     "down" -> Down n
     "up" -> Up n
   where
-    (com, rest) = break isSpace
+    (com, rest) = break isSpace s
     n = read rest
 
 move :: Position -> Command -> Position
