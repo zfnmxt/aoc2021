@@ -10,7 +10,7 @@ type Point = (Int, Int)
 
 type Line = (Point, Point)
 
-type Diagram = Array (Int, Int) Int
+type Diagram = Array Point Int
 
 inputP :: Parser [Line]
 inputP = many $ do
