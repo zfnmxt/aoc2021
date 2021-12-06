@@ -11,6 +11,7 @@ library
       Day3.Diagnostic
       Day4.Bingo
       Day5.Thermals
+      Day6.Lanternfish
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,
