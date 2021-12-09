@@ -13,16 +13,26 @@ module Util
     many1,
     (+++),
     (<++),
+    ws1,
+    digit,
     Parser,
     Part (..),
+    Map,
+    Array,
+    (!?),
     module Control.Applicative,
     module Control.Monad,
+    module Data.Maybe,
   )
 where
 
 import Control.Applicative
 import Control.Monad
-import Data.Char (isDigit)
+import Data.Array (Array, bounds, (!))
+import Data.Char (isDigit, isSpace)
+import Data.Ix (Ix, inRange)
+import Data.Map (Map)
+import Data.Maybe
 import System.IO
 import Text.ParserCombinators.ReadP
 
@@ -44,8 +54,14 @@ fileParse fp p = parse p <$> readFile fp
 ws :: Parser ()
 ws = skipSpaces
 
+ws1 :: Parser ()
+ws1 = skipMany1 $ satisfy isSpace
+
 tokenize :: Parser a -> Parser a
 tokenize p = p <* ws
+
+digit :: Parser Int
+digit = (read . pure) <$> satisfy isDigit
 
 int :: Parser Int
 int = tokenize $ read <$> many1 (satisfy isDigit)
@@ -66,3 +82,8 @@ putPart2 a = putStrLn $ "part2: " <> show a
 
 fromFile :: FilePath -> (String -> IO a) -> IO a
 fromFile fp = (readFile fp >>=)
+
+(!?) :: Ix i => Array i e -> i -> Maybe e
+a !? i
+  | inRange (bounds a) i = Just $ a ! i
+  | otherwise = Nothing

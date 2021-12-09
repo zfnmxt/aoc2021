@@ -14,9 +14,11 @@ library
       Day6.Lanternfish
       Day7.Crabs
       Day8.Display
+      Day9.Smoke
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,
                       array
     hs-source-dirs:   src
     default-language: Haskell2010
+    default-extensions: TupleSections
