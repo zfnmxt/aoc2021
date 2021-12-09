@@ -13,6 +13,7 @@ library
       Day5.Thermals
       Day6.Lanternfish
       Day7.Crabs
+      Day8.Display
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,
