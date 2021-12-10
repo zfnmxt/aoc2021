@@ -4,10 +4,6 @@ import Data.List (sort)
 import qualified Data.Map as M
 import Util
 
-type Counts = Map Char Int
-
-type Scope = [Char]
-
 open :: [Char]
 open = "([{<"
 
