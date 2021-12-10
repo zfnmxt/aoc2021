@@ -6,15 +6,15 @@ maintainer:         zfnmxt@zfnmxt.com
 library
     exposed-modules:
       Util
-      Day1.Sonar
-      Day2.Dive
-      Day3.Diagnostic
-      Day4.Bingo
-      Day5.Thermals
-      Day6.Lanternfish
-      Day7.Crabs
-      Day8.Display
-      Day9.Smoke
+      Day01.Sonar
+      Day02.Dive
+      Day03.Diagnostic
+      Day04.Bingo
+      Day05.Thermals
+      Day06.Lanternfish
+      Day07.Crabs
+      Day08.Display
+      Day09.Smoke
       Day10.Syntax
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,

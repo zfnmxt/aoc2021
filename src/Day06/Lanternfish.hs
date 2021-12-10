@@ -1,4 +1,4 @@
-module Day6.Lanternfish where
+module Day06.Lanternfish where
 
 import Data.List (splitAt)
 import Data.Map (Map)

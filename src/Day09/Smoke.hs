@@ -1,4 +1,4 @@
-module Day9.Smoke where
+module Day09.Smoke where
 
 import Data.Array (Array, (!))
 import qualified Data.Array as A

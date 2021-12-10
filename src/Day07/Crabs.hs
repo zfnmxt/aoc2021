@@ -1,4 +1,4 @@
-module Day7.Crabs where
+module Day07.Crabs where
 
 import Util
 

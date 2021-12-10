@@ -1,4 +1,4 @@
-module Day1.Sonar where
+module Day01.Sonar where
 
 increases :: Ord a => [a] -> [Ordering]
 increases as = zipWith compare (tail as) as

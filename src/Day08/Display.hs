@@ -1,4 +1,4 @@
-module Day8.Display where
+module Day08.Display where
 
 import Data.Bifunctor (second)
 import qualified Data.List as L

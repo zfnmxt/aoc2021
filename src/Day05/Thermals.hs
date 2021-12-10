@@ -1,4 +1,4 @@
-module Day5.Thermals where
+module Day05.Thermals where
 
 import Data.Array (Array)
 import qualified Data.Array as A

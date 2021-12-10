@@ -1,4 +1,4 @@
-module Day2.Dive where
+module Day02.Dive where
 
 import Data.Char (isSpace)
 
