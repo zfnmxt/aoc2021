@@ -15,6 +15,7 @@ module Util
     (<++),
     ws1,
     digit,
+    satisfy,
     Parser,
     Part (..),
     Map,
@@ -23,6 +24,7 @@ module Util
     module Control.Applicative,
     module Control.Monad,
     module Data.Maybe,
+    module Data.Either,
   )
 where
 
@@ -30,6 +32,7 @@ import Control.Applicative
 import Control.Monad
 import Data.Array (Array, bounds, (!))
 import Data.Char (isDigit, isSpace)
+import Data.Either
 import Data.Ix (Ix, inRange)
 import Data.Map (Map)
 import Data.Maybe

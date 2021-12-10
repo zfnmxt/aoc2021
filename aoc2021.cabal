@@ -15,6 +15,7 @@ library
       Day7.Crabs
       Day8.Display
       Day9.Smoke
+      Day10.Syntax
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,
