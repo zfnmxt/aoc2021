@@ -16,6 +16,7 @@ library
       Day08.Display
       Day09.Smoke
       Day10.Syntax
+      Day11.Octopus
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,

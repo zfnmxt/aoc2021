@@ -21,6 +21,9 @@ module Util
     Map,
     Array,
     (!?),
+    (!),
+    (//),
+    iterateN,
     module Control.Applicative,
     module Control.Monad,
     module Data.Maybe,
@@ -30,7 +33,7 @@ where
 
 import Control.Applicative
 import Control.Monad
-import Data.Array (Array, bounds, (!))
+import Data.Array (Array, bounds, (!), (//))
 import Data.Char (isDigit, isSpace)
 import Data.Either
 import Data.Ix (Ix, inRange)
@@ -90,3 +93,8 @@ fromFile fp = (readFile fp >>=)
 a !? i
   | inRange (bounds a) i = Just $ a ! i
   | otherwise = Nothing
+
+iterateN :: Int -> (a -> a) -> a -> a
+iterateN n f a
+  | n <= 0 = a
+  | otherwise = iterateN (n -1) f $ f a
