@@ -17,6 +17,12 @@ energy = fst
 count :: Octopus -> Int
 count = snd
 
+modifyEnergy :: (Int -> Int) -> Octopus -> Octopus
+modifyEnergy = first
+
+modifyCount :: (Int -> Int) -> Octopus -> Octopus
+modifyCount = second
+
 inputP :: Parser Octopuses
 inputP = do
   os <- tokenize $ sepBy1 (many1 digit) ws1
@@ -35,17 +41,17 @@ adjacent os (x, y) =
 
 step :: Octopuses -> Octopuses
 step octos =
-  fmap (first (\x -> if x > 9 then 0 else x)) $
+  fmap (modifyEnergy (\x -> if x > 9 then 0 else x)) $
     (\os -> flash os [p | (p, (x, _f)) <- A.assocs os, x > 9]) $
-      fmap (first (+ 1)) octos
+      fmap (modifyEnergy (+ 1)) octos
   where
     flash :: Octopuses -> [Pos] -> Octopuses
     flash os [] = os
     flash os (p : ps)
       | energy (os ! p) > 9 && count (os ! p) == count (octos ! p) =
-        let os' = os // [(p, second (+ 1) (os ! p))]
+        let os' = os // [(p, modifyCount (+ 1) (os ! p))]
             adj = adjacent os' p
-            os'' = os' // [(p', first (+ 1) (os' ! p')) | p' <- adj]
+            os'' = os' // [(p', modifyEnergy (+ 1) (os' ! p')) | p' <- adj]
          in flash os'' (adj ++ ps)
       | otherwise = flash os ps
 
