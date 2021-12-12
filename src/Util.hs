@@ -24,6 +24,8 @@ module Util
     (!),
     (//),
     iterateN,
+    second,
+    first,
     module Control.Applicative,
     module Control.Monad,
     module Data.Maybe,
@@ -34,6 +36,7 @@ where
 import Control.Applicative
 import Control.Monad
 import Data.Array (Array, bounds, (!), (//))
+import Data.Bifunctor (first, second)
 import Data.Char (isDigit, isSpace)
 import Data.Either
 import Data.Ix (Ix, inRange)
@@ -78,7 +81,7 @@ char' = tokenize . char
 string' :: String -> Parser String
 string' = tokenize . string
 
-data Part = Part1 | Part2
+data Part = Part1 | Part2 deriving (Eq)
 
 putPart1 :: Show a => a -> IO ()
 putPart1 a = putStrLn $ "part1: " <> show a
