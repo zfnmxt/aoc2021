@@ -18,6 +18,7 @@ library
       Day10.Syntax
       Day11.Octopus
       Day12.Pathing
+      Day13.Origami
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,
