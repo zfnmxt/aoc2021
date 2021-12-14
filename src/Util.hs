@@ -16,6 +16,7 @@ module Util
     ws1,
     digit,
     satisfy,
+    satisfy',
     Parser,
     Part (..),
     Map,
@@ -80,6 +81,9 @@ char' = tokenize . char
 
 string' :: String -> Parser String
 string' = tokenize . string
+
+satisfy' :: (Char -> Bool) -> Parser Char
+satisfy' = tokenize . satisfy
 
 data Part = Part1 | Part2 deriving (Eq)
 

@@ -19,6 +19,7 @@ library
       Day11.Octopus
       Day12.Pathing
       Day13.Origami
+      Day14.Polymerization 
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,
