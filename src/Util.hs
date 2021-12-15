@@ -27,6 +27,13 @@ module Util
     iterateN,
     second,
     first,
+    bimap,
+    gridFromList,
+    neighbors,
+    neighborsDiag,
+    putPart1,
+    putPart2,
+    fileParse,
     module Control.Applicative,
     module Control.Monad,
     module Data.Maybe,
@@ -36,8 +43,8 @@ where
 
 import Control.Applicative
 import Control.Monad
-import Data.Array (Array, bounds, (!), (//))
-import Data.Bifunctor (first, second)
+import Data.Array (Array, bounds, listArray, (!), (//))
+import Data.Bifunctor (bimap, first, second)
 import Data.Char (isDigit, isSpace)
 import Data.Either
 import Data.Ix (Ix, inRange)
@@ -105,3 +112,25 @@ iterateN :: Int -> (a -> a) -> a -> a
 iterateN n f a
   | n <= 0 = a
   | otherwise = iterateN (n -1) f $ f a
+
+gridFromList :: [[a]] -> Array (Int, Int) a
+gridFromList ass@(as : _) =
+  listArray ((0, 0), (length ass -1, length as - 1)) $ concat ass
+
+neighbors :: Array (Int, Int) a -> (Int, Int) -> [(Int, Int)]
+neighbors a (x, y) =
+  filter
+    (\(x, y) -> x >= x_min && x <= x_max && y >= y_min && y <= y_max)
+    ([(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)])
+  where
+    ((x_min, y_min), (x_max, y_max)) = bounds a
+
+neighborsDiag :: Array (Int, Int) a -> (Int, Int) -> [(Int, Int)]
+neighborsDiag a (x, y) =
+  filter
+    (\(x, y) -> x >= x_min && x <= x_max && y >= y_min && y <= y_max)
+    ( [(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)]
+        ++ [(x - 1, y - 1), (x - 1, y + 1), (x + 1, y - 1), (x + 1, y + 1)]
+    )
+  where
+    ((x_min, y_min), (x_max, y_max)) = bounds a

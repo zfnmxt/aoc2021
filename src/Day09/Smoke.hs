@@ -20,9 +20,6 @@ inputP = do
   let bounds = ((0, 0), (length rs - 1, length r - 1))
   return $ A.listArray bounds $ concat rs
 
-neighbors :: Cave -> Pos -> [Pos]
-neighbors c (x, y) = filter (`elem` (A.range $ A.bounds c)) [(x, y -1), (x, y + 1), (x -1, y), (x + 1, y)]
-
 lowPoint :: Cave -> Pos -> Bool
 lowPoint c p = all ((> (c ! p)) . (c !)) $ neighbors c p
 
