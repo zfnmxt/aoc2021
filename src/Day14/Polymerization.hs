@@ -38,11 +38,12 @@ synthesize rs p n = iterateN n (step rs) init_map
     init_map = M.fromListWith (+) $ zip (zip p $ tail p) $ repeat 1
 
 polymerization :: Part -> Rules -> Polymer -> Integer
-polymerization part rs p = (maximum counts - minimum counts) `div` 2 + 1
+polymerization part rs p = (maximum counts - minimum counts) `div` 2
   where
     counts =
       map snd $
         M.toList $
           M.fromListWith (+) $
-            concatMap (\((l, r), n) -> [(l, n), (r, n)]) $
-              M.toList $ synthesize rs p (if part == Part1 then 10 else 40)
+            (++ [(head p, 1), (last p, 1)]) $
+              concatMap (\((l, r), n) -> [(l, n), (r, n)]) $
+                M.toList $ synthesize rs p (if part == Part1 then 10 else 40)
