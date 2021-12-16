@@ -84,8 +84,8 @@ packetP = do
     payloadP 4 = litP
     payloadP _ = opP
 
-inputP :: String -> Packet Int
-inputP = parse (packetP <* many (char '0')) . hexToBin
+inputP :: Parser (Packet Int)
+inputP = transformInput hexToBin $ packetP <* many (char '0')
 
 eval :: Packet Int -> Int
 eval (Packet _v t ps) = f t $ eval_payload ps

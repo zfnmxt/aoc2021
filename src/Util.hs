@@ -40,6 +40,7 @@ module Util
     bin2int,
     look,
     gather,
+    transformInput,
     module Control.Applicative,
     module Control.Monad,
     module Data.Maybe,
@@ -60,6 +61,9 @@ import System.IO
 import Text.ParserCombinators.ReadP
 
 type Parser a = ReadP a
+
+transformInput :: (String -> String) -> Parser a -> Parser a
+transformInput f = readS_to_P . (. f) . readP_to_S
 
 parse :: Parser a -> String -> a
 parse p s =
