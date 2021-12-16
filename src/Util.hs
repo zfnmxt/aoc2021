@@ -34,6 +34,12 @@ module Util
     putPart1,
     putPart2,
     fileParse,
+    count,
+    Bit,
+    Bin,
+    bin2int,
+    look,
+    gather,
     module Control.Applicative,
     module Control.Monad,
     module Data.Maybe,
@@ -134,3 +140,10 @@ neighborsDiag a (x, y) =
     )
   where
     ((x_min, y_min), (x_max, y_max)) = bounds a
+
+type Bit = Char
+
+type Bin = [Bit]
+
+bin2int :: Bin -> Int
+bin2int = sum . zipWith (*) [2 ^ p | p <- [0 ..]] . reverse . map (read . pure)

@@ -21,6 +21,7 @@ library
       Day13.Origami
       Day14.Polymerization
       Day15.Chiton
+      Day16.Decoder
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,

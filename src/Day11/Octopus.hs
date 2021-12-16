@@ -14,14 +14,14 @@ type Octopuses = Array Pos Octopus
 energy :: Octopus -> Int
 energy = fst
 
-count :: Octopus -> Int
-count = snd
+num :: Octopus -> Int
+num = snd
 
 modifyEnergy :: (Int -> Int) -> Octopus -> Octopus
 modifyEnergy = first
 
-modifyCount :: (Int -> Int) -> Octopus -> Octopus
-modifyCount = second
+modifyNum :: (Int -> Int) -> Octopus -> Octopus
+modifyNum = second
 
 inputP :: Parser Octopuses
 inputP = do
@@ -48,13 +48,13 @@ step octos =
     flash :: Octopuses -> [Pos] -> Octopuses
     flash os [] = os
     flash os (p : ps)
-      | energy (os ! p) > 9 && count (os ! p) == count (octos ! p) =
-        let os' = os // [(p, modifyCount (+ 1) (os ! p))]
+      | energy (os ! p) > 9 && num (os ! p) == num (octos ! p) =
+        let os' = os // [(p, modifyNum (+ 1) (os ! p))]
             adj = adjacent os' p
             os'' = os' // [(p', modifyEnergy (+ 1) (os' ! p')) | p' <- adj]
          in flash os'' (adj ++ ps)
       | otherwise = flash os ps
 
 octopus :: Part -> Octopuses -> Int
-octopus Part1 os = sum $ count <$> iterateN 100 step os
+octopus Part1 os = sum $ num <$> iterateN 100 step os
 octopus Part2 os = snd $ until (foldr (\x b -> energy x == 0 && b) True . fst) (bimap step (+ 1)) (os, 0)

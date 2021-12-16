@@ -1,10 +1,7 @@
 module Day03.Diagnostic where
 
 import Data.List (transpose)
-
-type Bin = String
-
-type Bit = Char
+import Util
 
 mostCommon :: Bin -> Bit
 mostCommon b = if 2 * numOne >= length b then '1' else '0'
@@ -20,9 +17,6 @@ leastCommon = neg . mostCommon
 
 rate :: (Bin -> Bit) -> [Bin] -> Bin
 rate f = map f . transpose
-
-bin2int :: Bin -> Int
-bin2int = sum . zipWith (*) [2 ^ p | p <- [0 ..]] . reverse . map (read . pure)
 
 find :: (Bin -> Bit) -> [Bin] -> Bin
 find criteria bs = head $ foldl f bs [0 .. length bs - 1]
