@@ -41,6 +41,8 @@ module Util
     look,
     gather,
     transformInput,
+    euler,
+    Set,
     module Control.Applicative,
     module Control.Monad,
     module Data.Maybe,
@@ -57,6 +59,7 @@ import Data.Either
 import Data.Ix (Ix, inRange)
 import Data.Map (Map)
 import Data.Maybe
+import Data.Set (Set)
 import System.IO
 import Text.ParserCombinators.ReadP
 
@@ -91,7 +94,10 @@ digit :: Parser Int
 digit = (read . pure) <$> satisfy isDigit
 
 int :: Parser Int
-int = tokenize $ read <$> many1 (satisfy isDigit)
+int = tokenize $ do
+  neg <- option 1 (char '-' >> return (-1))
+  num <- many1 $ satisfy isDigit
+  return $ neg * read num
 
 char' :: Char -> Parser Char
 char' = tokenize . char
@@ -151,3 +157,6 @@ type Bin = [Bit]
 
 bin2int :: Bin -> Int
 bin2int = sum . zipWith (*) [2 ^ p | p <- [0 ..]] . reverse . map (read . pure)
+
+euler :: Int -> Int
+euler x = (x * (x + 1)) `div` 2
