@@ -1,6 +1,5 @@
 module Day17.Shot where
 
-import qualified Data.Set as S
 import Util
 
 type Pos = (Int, Int)
@@ -48,13 +47,12 @@ inTarget :: Target -> Probe -> Bool
 inTarget t (Probe (x, y) _ _) =
   xMin t <= x && x <= xMax t && yMin t <= y && y <= yMax t
 
-hits :: Target -> Set Probe
-hits t = S.fromList $ do
+hits :: Target -> [Probe]
+hits t = do
   v_x <- [min_vx .. max_vx]
   v_y <- [- max_vy .. max_vy]
-  n <- [0 .. max_n v_y]
   let p = Probe (0, 0) v_x v_y
-  guard $ inTarget t $ steps n p
+  guard (any (inTarget t . flip steps p) [0 .. max_n v_y])
   return p
   where
     min_vx = floor $ (sqrt (8 * (fromIntegral $ xMin t) + 1) + 1) / 2
@@ -66,5 +64,5 @@ maxY :: Probe -> Int
 maxY = euler . vY
 
 shot :: Part -> Target -> Int
-shot Part1 = maximum . S.map maxY . hits
+shot Part1 = maximum . map maxY . hits
 shot Part2 = length . hits
