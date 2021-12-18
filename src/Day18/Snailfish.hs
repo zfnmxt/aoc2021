@@ -36,20 +36,23 @@ explode = (\(_, s, _) -> s) . explode' 0
     addRightmost n (Val x) = Val $ n + x
     addRightmost n (Pair l r) = l `Pair` addRightmost n r
 
-splitOne :: Snailfish -> Snailfish
+splitOne :: Snailfish -> Maybe Snailfish
 splitOne (Val x)
-  | x >= 10 = Pair (Val $ floor $ fromIntegral x / 2) (Val $ ceiling $ fromIntegral x / 2)
-  | otherwise = Val x
-splitOne (Pair l r)
-  | splitOne l == l = l `Pair` splitOne r
-  | otherwise = splitOne l `Pair` r
+  | x >= 10 = Just $ Pair (Val $ floor $ fromIntegral x / 2) (Val $ ceiling $ fromIntegral x / 2)
+  | otherwise = Nothing
+splitOne (Pair l r) = do
+  case (splitOne l, splitOne r) of
+    (Just l', _) -> Just $ l' `Pair` r
+    (Nothing, Just r') -> Just $ l `Pair` r'
+    _ -> Nothing
 
 reduce :: Snailfish -> Snailfish
-reduce s
-  | s' /= s = reduce s'
-  | otherwise = s
+reduce s =
+  case splitOne e of
+    Just s' -> reduce s'
+    Nothing -> e
   where
-    s' = splitOne $ explode s
+    e = explode s
 
 add :: Snailfish -> Snailfish -> Snailfish
 add s1 s2 = reduce $ Pair s1 s2
