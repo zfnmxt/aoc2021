@@ -23,6 +23,7 @@ library
       Day15.Chiton
       Day16.Decoder
       Day17.Shot
+      Day18.Snailfish
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,

@@ -17,6 +17,7 @@ module Util
     digit,
     satisfy,
     satisfy',
+    endBy,
     Parser,
     Part (..),
     Map,
