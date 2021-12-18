@@ -30,9 +30,11 @@ explode = (\(_, s, _) -> s) . explode' 0
           (rlv, r', rrv) = explode' (n + 1) $ addLeftmost lrv r
        in (llv, addRightmost rlv l' `Pair` r', rrv)
 
+    addLeftmost 0 s = s
     addLeftmost n (Val x) = Val $ n + x
     addLeftmost n (Pair l r) = addLeftmost n l `Pair` r
 
+    addRightmost 0 s = s
     addRightmost n (Val x) = Val $ n + x
     addRightmost n (Pair l r) = l `Pair` addRightmost n r
 
