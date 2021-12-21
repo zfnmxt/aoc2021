@@ -25,6 +25,7 @@ library
       Day17.Shot
       Day18.Snailfish
       Day19.Scanner
+      Day20.Pixels
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0,
                       containers,
